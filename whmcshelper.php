@@ -44,8 +44,8 @@ class WhmcsHelper
      *
      * @var $string
      */
-    public $whmcs_url;
-    public $username, $password, $ip_access, $api_key, $res_type;
+    public $whmcs_url, $ip_access, $api_key, $res_type;
+    private $_username, $_password, ;
 
     /**
      * Initialize the class and set its properties.
@@ -65,12 +65,21 @@ class WhmcsHelper
     ) {
     
         $this->whmcs_url = $whmcs_url;
-        $this->username = $this->username;
-        $this->password = isset($password) ? md5($password) : null;
+        $this->_username = $username;
+        $this->_password = isset($password) ? md5($password) : null;
         $this->ip_access = $ip_access;
         $this->api_key = $api_key;
         $this->res_type = $res_type;
     }
+
+    public function setUsername($username){
+        $this->_username = $username;
+    }
+
+    public function setPassword($password){
+        $this->_password = md5($password);
+    }
+
 
     /**
      * Call WHMCS API
